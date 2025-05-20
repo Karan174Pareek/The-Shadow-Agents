@@ -80,15 +80,18 @@
       <button class="scroll-btn" data-url="https://example.com/agency-owner">»»»</button>
     </div>
     <div class="testimonial-card">
+      <img src="testimonialbg.svg" alt="Person Image" class="testimonial-img" />
       <p>“The dedicated brand manager feature completely streamlined our workflow. Communication is finally frictionless.”<br><br>
       <strong>– Founder, UK</strong></p>
       <button class="scroll-btn" data-url="https://example.com/founder-uk">»»»</button>
     </div>
     <div class="testimonial-card">
+      <img src="testimonialbg.svg" alt="Person Image" class="testimonial-img" />
       <p>“Their quick turnaround times made it effortless to handle client demands. Our content calendar actually runs ahead of schedule.”<br><br>
       <strong>– CEO, Australia</strong></p>
       <button class="scroll-btn" data-url="https://example.com/ceo-australia">»»»</button>
     </div>
+    <img src="testimonialbg.svg" alt="Person Image" class="testimonial-img" />
     <div class="testimonial-card">
       <p>“From 5 to 22 clients in 6 months—Shadow Agents scaled our backend with zero hiring. They’re the team behind our growth.”<br><br>
       <strong>– Media Agency Owner, US</strong></p>
@@ -168,27 +171,67 @@
     <p>Copyright 2025. All Rights Reserved.</p>
   </div>
 </footer>
-
 <script>
   const track = document.getElementById('testimonialTrack');
   const buttons = document.querySelectorAll('.scroll-btn');
   let currentIndex = 0;
   const totalCards = track.children.length;
 
+  // Move slider to specific index
+  function moveToIndex(index) {
+    if (index < 0) index = 0;
+    if (index >= totalCards) index = totalCards - 1;
+    currentIndex = index;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
 
+  // Button click: move next or open URL if last
   buttons.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
       if (idx < totalCards - 1) {
-        currentIndex++;
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        moveToIndex(currentIndex + 1);
       } else {
+        // Open URL on last card
         const url = btn.getAttribute('data-url');
-        if (url) {
-          window.open(url, '_blank'); 
-        }
+        if (url) window.open(url, '_blank');
       }
     });
   });
+
+  // Swipe support variables
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const minSwipeDistance = 50; // minimum distance for swipe to count
+
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  track.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+  });
+
+  function handleSwipeGesture() {
+    const distance = touchEndX - touchStartX;
+    if (Math.abs(distance) < minSwipeDistance) return; // ignore small moves
+
+    if (distance > 0) {
+      // Swipe right: go to previous testimonial
+      moveToIndex(currentIndex - 1);
+    } else {
+      // Swipe left: go to next testimonial or open URL if last
+      if (currentIndex < totalCards - 1) {
+        moveToIndex(currentIndex + 1);
+      } else {
+        // Open URL on last card
+        const lastBtn = buttons[buttons.length - 1];
+        const url = lastBtn.getAttribute('data-url');
+        if (url) window.open(url, '_blank');
+      }
+    }
+  }
 </script>
+
 </body>
 </html>
