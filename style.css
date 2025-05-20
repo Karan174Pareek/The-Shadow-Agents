@@ -350,8 +350,7 @@ header {
   order: 0;
 }
 .footer-content {
-  width: fit-content;
-  max-width: fit-content;
+  width: 441;
   height: 275px;
   background: linear-gradient(94.79deg, #6DADFF -20.55%, #0069FA 59.58%);
   border-radius: 10px;
