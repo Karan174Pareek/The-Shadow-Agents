@@ -584,7 +584,7 @@ header {
 }
 
 .footer-content {
-  width: auto;
+  width: 448px;
   height: 275px;
   background: linear-gradient(94.79deg, #6DADFF -20.55%, #0069FA 59.58%);
   border-radius: 10px;
