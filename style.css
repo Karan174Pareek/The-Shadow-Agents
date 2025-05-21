@@ -280,7 +280,7 @@ header {
 
 .pin {
   position: absolute;
-  left: 9px;
+  left: 15px;
   top: 64px;
   width: 19px;
   height: 18px;
@@ -344,7 +344,7 @@ header {
 
 .faqs {
   padding: 40px 20px;
-  width: 412px;
+  width: 420px;
   margin: 0 auto;
   position: relative;
 }
@@ -586,7 +586,7 @@ header {
 }
 
 .footer-content {
-  width: 448px;
+  width: 458px;
   height: 275px;
   background: linear-gradient(94.79deg, #6DADFF -20.55%, #0069FA 59.58%);
   border-radius: 10px;
@@ -669,6 +669,7 @@ header {
 .background
 {
   position: relative;
+  width: 460px;
   height: 818px;
   margin-top:20px;
 }
