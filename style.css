@@ -108,11 +108,11 @@ header {
 }
 
 .fail-section {
-  width: 420px;
-padding: 21px 31px;
-  text-align: center;
-  background: #f7faff;
-  position: relative;
+    width: 400px;
+    padding: 20px 30px;
+    text-align: center;
+    background: #f7faff;
+    position: relative;
 }
 
 
@@ -641,8 +641,24 @@ svg {
     font-size: 35px;
     line-height: 40px;
     letter-spacing: 0%;
-    margin-left: 19px;
+    margin-left: 0px;
   
+}
+
+.highlight2{
+    background: linear-gradient(90deg, #6DADFF, #0069FA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  border: 1px solid black;
+  width: 300px;
+  border-style: hidden;
+  font-weight: 700;
+    font-size: 35px;
+    line-height: 40px;
+    letter-spacing: 0%;
+    margin-left: 18px;
 }
 
 .highlight1{
@@ -661,21 +677,6 @@ svg {
     margin-left: 0px;
 }
 
-.highlight2{
-  background: linear-gradient(90deg, #6DADFF, #0069FA);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  border: 1px solid black;
-  width: 300px;
-  border-style: hidden;
-  font-weight: 700;
-    font-size: 35px;
-    line-height: 40px;
-    letter-spacing: 0%;
-    margin-left: 0px;
-}
 
 
 .highlight3{
@@ -695,7 +696,21 @@ svg {
 }
 
 
-
+.highlight4{
+  background: linear-gradient(90deg, #6DADFF, #0069FA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  border: 1px solid black;
+  width: 300px;
+  border-style: hidden;
+  font-weight: 700;
+    font-size: 35px;
+    line-height: 40px;
+    letter-spacing: 0%;
+    margin-left: 0px;
+}
 
 .arrow-icon {
   font-size: 24px;
@@ -887,13 +902,15 @@ svg {
 }
 
 .social-icons {
-  display: flex;
-  flex-direction: row;
-  padding: 0px;
-  justify-content: center;
-  gap: 25px;
-  margin-bottom: -17px;
+    display: flex
+;
+    flex-direction: row;
+    padding: 0px 126px;
+    justify-content: space-evenly;
+    gap: 25px;
+    margin-bottom: -13px;
 }
+
 
 .social-icons img {
   width: 28px;
