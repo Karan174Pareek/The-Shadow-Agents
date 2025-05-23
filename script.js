@@ -50,42 +50,56 @@ function handleSwipeGesture() {
   }
 }
 
-document.querySelectorAll('.info-card .card-header').forEach(header => {
-  const cardBody = header.nextElementSibling;
+document.querySelectorAll('.feature').forEach(feature => {
+    const arrow = feature.querySelector('.arrow-icon');
+    const cardId = feature.getAttribute('data-target');
+    const card = document.getElementById(cardId);
 
-  header.style.cursor = 'pointer';
-
-  header.addEventListener('click', () => {
-    const isOpen = cardBody.style.display === 'block';
-
-    // Toggle visibility of the card body
-    cardBody.style.display = isOpen ? 'none' : 'block';
-  });
-});
-
-
-
-  document.querySelectorAll('.faq-trigger').forEach(trigger => {
-    const arrow = trigger.querySelector('.faq-arrow');
-    const targetId = trigger.getAttribute('data-target');
-    const answer = document.getElementById(targetId);
-  
     arrow.style.cursor = 'pointer';
-  
+
     arrow.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isVisible = answer.style.display === 'block';
-      answer.style.display = isVisible ? 'none' : 'block';
-  
+      const isVisible = card.style.display === 'block';
+      document.querySelectorAll('.info-card').forEach(c => c.style.display = 'none');
+      document.querySelectorAll('.feature').forEach(f => f.style.display = 'flex');
+
       if (!isVisible) {
-        answer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Show the clicked card
+        card.style.display = 'block';
+        // Hide its associated feature bar
+        feature.style.display = 'none';
+        // Scroll into view
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
+
+  document.querySelectorAll('.info-card .arrow-icon').forEach(arrow => {
+    arrow.style.cursor = 'pointer';
   
+    arrow.addEventListener('click', () => {
+      const card = arrow.closest('.info-card');
+      const cardId = card.id;
+      const feature = document.querySelector(`.feature.faq[data-target="${cardId}"]`);
   
-  // Number Animations
-function animateCount(el, target, duration = 2000) {
+      const isOpen = card.style.display === 'block';
+  
+      if (isOpen) {
+        // Close card and show blue question row
+        card.style.display = 'none';
+        if (feature) feature.style.display = 'flex';
+      } else {
+        // Open card and hide question row
+        card.style.display = 'block';
+        if (feature) feature.style.display = 'none';
+        card.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+
+
+  function animateCount(el, target, duration = 2000) {
   let start = 1;
   const stepTime = Math.max(Math.floor(duration / (target - start)), 20);
 
@@ -103,13 +117,14 @@ function animateCount(el, target, duration = 2000) {
   let start = 1;
   let current = start;
 
+  // Adjust increment based on target size
   const increment = target > 500 ? Math.ceil(target / (duration / 30)) : 1;
   const intervalTime = 30;
 
   const counter = setInterval(() => {
     current += increment;
     if (current >= target) {
-      el.textContent = target.toLocaleString();
+      el.textContent = target.toLocaleString(); // Add commas if needed
       clearInterval(counter);
     } else {
       el.textContent = current.toLocaleString();
@@ -117,7 +132,7 @@ function animateCount(el, target, duration = 2000) {
   }, intervalTime);
 }
 
-// scrolling animation
+
 const animatedElements = document.querySelectorAll('.sm-boxes p');
 const observer = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
@@ -138,25 +153,9 @@ const observer = new IntersectionObserver((entries, obs) => {
 animatedElements.forEach(p => {
   observer.observe(p);
 });
-
-
-const boxes = document.querySelectorAll('.box');
-const tooltip = document.getElementById('tooltip');
-
-boxes.forEach(box => {
-box.addEventListener('click', function(e) {
-const info = this.dataset.info;
-tooltip.innerText = info || '[Add content here]';
-tooltip.style.top = this.offsetTop + this.offsetHeight + 5 + 'px';
-tooltip.style.left = '184px'; 
-tooltip.style.width = '249px'; 
-tooltip.style.display = 'block';
-});
-});
-
-
-document.addEventListener('click', function(e) {
-  if (!e.target.classList.contains('box')) {
-    tooltip.style.display = 'none';
-  }
-});
+function showContent(el) {
+      const content = el.nextElementSibling;
+      if (content && content.classList.contains('content-box')) {
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      }
+    }
