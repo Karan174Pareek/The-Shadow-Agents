@@ -528,6 +528,7 @@ svg {
 
 
 
+
 .pin {
   position: absolute;
   left: 15px;
@@ -1061,4 +1062,53 @@ svg {
 }
 .box-btn:hover {
   background: rgba(255,255,255,0.4);
+}
+
+.portfolio-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.portfolio-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+
+.portfolio-card {
+  flex: 0 0 100%;
+  position: relative;
+  height: 711px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+.portfolio-card p {
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 35px;
+  line-height: 40px;
+}
+.portfolio-card strong {
+  color: #FFFFFF;
+  display: block;
+  margin-top: 15px;
+  font-weight: 900;
+}
+
+.blue {
+  /*background: linear-gradient(90deg, #6DADFF, #0069FA);*/
+  border-radius: 6px;
+  max-width: 500px;
+  margin: 0 auto;
+  overflow-y: auto;         
+  overflow-x: hidden;       
+  padding-right: 10px;      
+  scroll-behavior: smooth;
+  margin-top: 20px;
+  height: 730px;
+  width: 412px;
+  position: relative;
 }
