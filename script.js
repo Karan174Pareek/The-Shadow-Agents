@@ -1,3 +1,4 @@
+/*Testimonial function*/
 const track = document.getElementById('testimonialTrack');
 const buttons = document.querySelectorAll('.scroll-btn');
 let currentIndex = 0;
@@ -49,6 +50,55 @@ function handleSwipeGesture() {
     }
   }
 }
+
+
+//portfolio
+
+const portfolioTrack = document.getElementById('portfolioTrack');
+const portfolioButtons = document.querySelectorAll('.portfolio-card .scroll-btn');
+let currentPortfolioIndex = 0;
+const totalPortfolioCards = portfolioTrack.children.length;
+
+function movePortfolioToIndex(index) {
+  if (index < 0) index = 0;
+  if (index >= totalPortfolioCards) index = totalPortfolioCards - 1;
+  currentPortfolioIndex = index;
+  portfolioTrack.style.transform = `translateX(-${currentPortfolioIndex * 100}%)`;
+}
+
+portfolioButtons.forEach((btn, idx) => {
+  btn.addEventListener('click', () => {
+    if (idx < totalPortfolioCards - 1) {
+      movePortfolioToIndex(currentPortfolioIndex + 1);
+    } else {
+      const url = btn.getAttribute('data-url');
+      if (url) window.open(url, '_blank');
+    }
+  });
+});
+
+let portfolioTouchStart = 0;
+let portfolioTouchEnd = 0;
+const portfolioSwipeThreshold = 50;
+
+portfolioTrack.addEventListener('touchstart', e => {
+  portfolioTouchStart = e.changedTouches[0].screenX;
+});
+
+portfolioTrack.addEventListener('touchend', e => {
+  portfolioTouchEnd = e.changedTouches[0].screenX;
+  const distance = portfolioTouchEnd - portfolioTouchStart;
+
+  if (Math.abs(distance) < portfolioSwipeThreshold) return;
+
+  if (distance > 0) {
+    movePortfolioToIndex(currentPortfolioIndex - 1);
+  } else {
+    movePortfolioToIndex(currentPortfolioIndex + 1);
+  }
+});
+
+
 
 document.querySelectorAll('.feature').forEach(feature => {
     const arrow = feature.querySelector('.arrow-icon');
